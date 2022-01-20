@@ -1,2 +1,2 @@
+[link 1]something.com
 
-[link 1](((((something.com)))))))
