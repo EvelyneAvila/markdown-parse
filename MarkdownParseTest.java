@@ -1,0 +1,110 @@
+import static org.junit.Assert.*;
+import org.junit.*;
+
+//Imports in order to be able to copy getLinks from MarkdownParse.java to this file
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+
+public class MarkdownParseTest {
+    @Test
+    public void addition() {
+        assertEquals(2, 1 + 1);
+    }
+
+    //Copy and pasted getLinks method and containsNewLine to be able to do second test
+    public ArrayList<String> getLinks(String markdown) {
+        ArrayList<String> toReturn = new ArrayList<>();
+        // find the next [, then find the ], then find the (, then take up to
+        // the next )
+    
+        /*
+        int currentIndex = 0;
+        while(currentIndex < markdown.length()) {
+    
+            int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            if(nextOpenBracket < 0){
+                currentIndex++;
+                continue;
+            }
+            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+            if(nextCloseBracket < 0){
+                currentIndex = nextOpenBracket + 1;
+                continue;
+            }
+            int openParen = markdown.indexOf("(", nextCloseBracket);
+            if(openParen < 0){
+                currentIndex = nextCloseBracket + 1;
+                continue;
+            }
+            int closeParen = markdown.indexOf(")", openParen) + 1;
+            if(closeParen < 0){
+                currentIndex = openParen + 1;
+                continue;
+            }
+            if(containsNewLine(markdown.substring(openParen + 1, closeParen))){
+                // New variable for finding the index of new lines
+                StringBuffer stringBuffer = new StringBuffer(markdown.substring(openParen + 1, closeParen));
+                currentIndex = stringBuffer.indexOf("\n") + 1;
+                // System.out.println("New line at " + stringBuffer.indexOf("\n"));
+            } else {
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+            }
+        }
+        return toReturn; */
+
+        int currentIndex = 0;
+        while(currentIndex < markdown.length()) {
+            int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+            int openParen = markdown.indexOf("(", nextCloseBracket);
+            int closeParen = markdown.indexOf(")", openParen);
+            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            currentIndex = closeParen + 1;
+        }
+        return toReturn;
+    }
+
+    
+    static boolean containsNewLine(String str) {
+        Pattern regex = Pattern.compile("^(.*)$", Pattern.MULTILINE);
+            return regex.split(str).length > 0;
+    }
+
+
+    @Test
+    public void testGetLinksF1() throws IOException {
+        Path fileName = Path.of("testFile2.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[]", links.toString());
+    }
+
+    @Test
+    public void testGetLinksF2() throws IOException {
+        Path fileName = Path.of("testFile2.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[]", links.toString());   
+    }
+
+    @Test
+    public void testGetLinksF3() throws IOException {
+        Path fileName = Path.of("testFile3.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[https::look parentheses()]", links.toString());   
+    }
+
+    @Test
+    public void testGetLinksF4() throws IOException {
+        Path fileName = Path.of("test-file4.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[]", links.toString());   
+    }
+}
