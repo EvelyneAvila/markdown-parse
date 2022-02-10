@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 //Imports in order to be able to copy getLinks from MarkdownParse.java to this file
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -105,6 +107,6 @@ public class MarkdownParseTest {
         Path fileName = Path.of("test-file4.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
-        assertEquals("[]", links.toString());   
+        assertEquals("[]", links.toString());
     }
 }
