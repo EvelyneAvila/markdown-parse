@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 
 public class MarkdownParse {
+
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then take up to
         // the next )
+
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
@@ -34,11 +38,25 @@ public class MarkdownParse {
                 currentIndex += openParen + 1;
                 continue;
             }
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
+            if(containsNewLine(markdown.substring(openParen + 1, closeParen))){
+                // New variable for finding the index of new lines
+                StringBuffer stringBuffer = new StringBuffer(markdown.substring(openParen + 1, closeParen));
+                currentIndex = stringBuffer.indexOf("\n") + 1;
+                // System.out.println("New line at " + stringBuffer.indexOf("\n"));
+            } else {
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+            }
         }
         return toReturn;
     }
+
+    static boolean containsNewLine(String str) {
+        Pattern regex = Pattern.compile("^(.*)$", Pattern.MULTILINE);
+            return regex.split(str).length > 0;
+    }
+
+
     public static void main(String[] args) throws IOException {
 		Path fileName = Path.of(args[0]);
 	    String contents = Files.readString(fileName);

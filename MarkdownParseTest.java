@@ -12,39 +12,35 @@ import java.util.regex.Pattern;
 
 
 public class MarkdownParseTest {
-    @Test
-    public void addition() {
-        assertEquals(2, 1 + 1);
-    }
 
-    //Copy and pasted getLinks method and containsNewLine to be able to do second test
-    public ArrayList<String> getLinks(String markdown) {
+    //Copy and pasted getLinks method and containsNewLine to be able to do tests here
+
+    public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then take up to
         // the next )
-    
-        
+
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-    
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             if(nextOpenBracket < 0){
-                currentIndex++;
+                currentIndex += 1;
                 continue;
             }
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             if(nextCloseBracket < 0){
-                currentIndex = nextOpenBracket + 1;
+                //make sure we are after the next index of the non-found string
+                currentIndex += nextOpenBracket + 1;
                 continue;
             }
             int openParen = markdown.indexOf("(", nextCloseBracket);
             if(openParen < 0){
-                currentIndex = nextCloseBracket + 1;
+                currentIndex += nextCloseBracket + 1;
                 continue;
             }
-            int closeParen = markdown.indexOf(")", openParen) + 1;
+            int closeParen = markdown.indexOf(")", openParen);
             if(closeParen < 0){
-                currentIndex = openParen + 1;
+                currentIndex += openParen + 1;
                 continue;
             }
             if(containsNewLine(markdown.substring(openParen + 1, closeParen))){
@@ -58,23 +54,16 @@ public class MarkdownParseTest {
             }
         }
         return toReturn;
-
-        int currentIndex = 0;
-        while(currentIndex < markdown.length()) {
-            int nextOpenBracket = markdown.indexOf("[", currentIndex);
-            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            int openParen = markdown.indexOf("(", nextCloseBracket);
-            int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
-        }
-        return toReturn;
     }
 
-    
     static boolean containsNewLine(String str) {
         Pattern regex = Pattern.compile("^(.*)$", Pattern.MULTILINE);
             return regex.split(str).length > 0;
+    }
+
+    @Test
+    public void addition() {
+        assertEquals(2, 1 + 1);
     }
 
 
