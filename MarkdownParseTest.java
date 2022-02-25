@@ -93,7 +93,7 @@ public class MarkdownParseTest {
         assertEquals("[`google.com, google.com, ucsd.edu]", links.toString());
     } 
 
-    /*
+    
     @Test
     public void testSnippet2() throws IOException {
         Path fileName = Path.of("snippet2.md");
@@ -102,6 +102,7 @@ public class MarkdownParseTest {
         assertEquals("[a.com, a.com(()), example.com]", links.toString());
     }
 
+    /*
     @Test
     public void testSnippet3() throws IOException {
         Path fileName = Path.of("snippet3.md");
