@@ -23,7 +23,7 @@ public class MarkdownParseTest {
         // find the next [, then find the ], then find the (, then take up to
         // the next )
     
-        /*
+        
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
     
@@ -57,7 +57,7 @@ public class MarkdownParseTest {
                 currentIndex = closeParen + 1;
             }
         }
-        return toReturn; */
+        return toReturn;
 
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
