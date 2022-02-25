@@ -61,8 +61,6 @@ public class MarkdownParseTest {
             return regex.split(str).length > 0;
     }
 
-    //Tests taken out for simplicity in JUnit tests outputs for Lab Report 4
-
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
@@ -85,7 +83,7 @@ public class MarkdownParseTest {
         assertEquals("[https://something.com, some-page.html]", links.toString());
     } 
 
-    //EDIT THESE ASSERTEQUALS
+    //Tests for Lab Report 4
     
     @Test
     public void testSnippet1() throws IOException {
