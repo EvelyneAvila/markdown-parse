@@ -68,21 +68,13 @@ public class MarkdownParseTest {
         assertEquals(2, 1 + 1);
     }
 
+    /*
     @Test
     public void testGetLinksF1() throws IOException {
         Path fileName = Path.of("testFile2.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         assertEquals("[]", links.toString());
-    } 
-
-    /*
-    @Test
-    public void testGetLinksF3() throws IOException {
-        Path fileName = Path.of("testFile3.md");
-	    String contents = Files.readString(fileName);
-        ArrayList<String> links = getLinks(contents);
-        assertEquals("[https::look parentheses()]", links.toString());   
     } */
 
     @Test
@@ -93,11 +85,29 @@ public class MarkdownParseTest {
         assertEquals("[https://something.com, some-page.html]", links.toString());
     } 
 
+    //EDIT THESE ASSERTEQUALS
+    
     @Test
     public void testSnippet1() throws IOException {
-        Path fileName = Path.of("testFile2.md");
+        Path fileName = Path.of("snippet1.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
-        assertEquals("[]", links.toString());
+        assertEquals("[`google.com, google.com, ucsd.edu]", links.toString());
     } 
+
+    @Test
+    public void testSnippet2() throws IOException {
+        Path fileName = Path.of("snippet2.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[a.com, a.com(()), example.com]", links.toString());
+    }
+
+    @Test
+    public void testSnippet3() throws IOException {
+        Path fileName = Path.of("snippet3.md");
+	    String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        assertEquals("[https://ucsd-cse15l-w22.github.io/]", links.toString());
+    }
 }
