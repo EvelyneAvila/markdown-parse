@@ -104,12 +104,12 @@ public class MarkdownParseTest {
     }
 
     
-    /*
+    
     @Test
     public void testSnippet3() throws IOException {
         Path fileName = Path.of("snippet3.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         assertEquals("[https://ucsd-cse15l-w22.github.io/]", links.toString());
-    }*/
+    }
 }
