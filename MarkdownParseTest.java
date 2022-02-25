@@ -85,6 +85,7 @@ public class MarkdownParseTest {
 
     //Tests for Lab Report 4
     
+    /*
     @Test
     public void testSnippet1() throws IOException {
         Path fileName = Path.of("snippet1.md");
@@ -100,7 +101,7 @@ public class MarkdownParseTest {
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         assertEquals("[a.com, a.com(()), example.com]", links.toString());
-    }
+    }*/
 
     
     @Test
