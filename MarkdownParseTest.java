@@ -61,6 +61,9 @@ public class MarkdownParseTest {
             return regex.split(str).length > 0;
     }
 
+    //Tests taken out for simplicity in JUnit tests outputs for Lab Report 4
+    
+    /*
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
@@ -75,14 +78,14 @@ public class MarkdownParseTest {
         assertEquals("[]", links.toString());
     } 
 
-    /*
+    
     @Test
     public void testGetLinksF3() throws IOException {
         Path fileName = Path.of("testFile3.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         assertEquals("[https::look parentheses()]", links.toString());   
-    }*/
+    }
 
     @Test
     public void testGetLinksF4() throws IOException {
@@ -90,5 +93,5 @@ public class MarkdownParseTest {
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         assertEquals("[https://something.com, some-page.html]", links.toString());
-    }
+    } */
 }
